@@ -11,13 +11,13 @@ function showEnd(){
     console.log("End..")
 }
 
-console.log("starting....")
-setTimeout(showEnd, 2000);
 
-console.log("starting....")
-setTimeout(showEnd, 2000);
+var hello = (callback) => {
+    callback("Ajmal")
+}
 
-console.log("starting....")
-setTimeout(showEnd, 2000);
+var hey = (data) => {
+    console.log("Hey",data)
+}
 
-
+hello(hey)
