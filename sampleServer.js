@@ -1,18 +1,21 @@
 const http = require('http');
 const fs = require('fs');
+const url = require('url');
+
 
 http.createServer((req, res) => {
-    if(req.url === '/'){
-        fs.readFile('sample.html', function (err, data) {
-            res.writeHead(200, { 'content-type': 'text/html' });
+    const q = url.parse(req.url,true)
+    if(q.pathname === '/'){
+        fs.readFile('form.html', (err, data) => {
             res.write(data);
-            res.end();
+            res.end()
         })
-    }else if(req.url === '/about'){
-        res.write("About Page")
+    }else if(q.pathname === '/profile'){
+        res.write(`<h1>Welcome ${q.query.fname} ${q.query.lname}</h1>`)
         res.end()
-    }else{
-        res.write("This is Error")
+    }
+    else{
+        res.write("<h1>Error</h1>");
         res.end()
     }
 }).listen(3000, () => {
